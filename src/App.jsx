@@ -4,12 +4,14 @@ import AdminDashboard from './pages/admin/adminDashboard'
 import HomePage from './pages/home/homePage'
 import Testing from './components/testing'
 import LoginPage from './pages/login/loginPage'
+import { Toaster } from 'react-hot-toast'
 
 
 function App() {
   return (
   
   <BrowserRouter>
+     <Toaster/>
      <Routes path="/*">
         <Route path='/testing' element={<Testing/>}/>
         <Route path='/login' element={<LoginPage/>}/>

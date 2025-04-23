@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -16,9 +17,18 @@ export default function LoginPage() {
       }
     ).then((res)=>{
       console.log(res)
-      alert("login successful")
+      toast.success("Login successful")
+      const user  = res.data.user
+      
+      if(user.role === "admin"){
+        window.location.href = "/admin/"
+      }else{
+        window.location.href = "/"
+      }
+      
     }).catch((err)=>{
       console.log(err)
+      toast.error(err.response.data.error)
     })
   };
 
