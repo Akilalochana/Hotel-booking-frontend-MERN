@@ -5,6 +5,8 @@ import { MdBedroomChild } from "react-icons/md";
 import { MdRateReview } from "react-icons/md";
 import { FaUserCog } from "react-icons/fa";
 import { Link, Route, Routes } from "react-router-dom";
+import { AdminRooms } from "./adminRomms";
+import AdminAddRooms from "./adminAddRooms";
 
 export default function AdminDashboard() {
   return(
@@ -46,9 +48,10 @@ export default function AdminDashboard() {
     <div className='w-[calc(100vw-400px)] h-full '>
       <Routes path="/*">
           <Route path="/booking" element={<h1>Booking</h1>}/>
-          <Route path="/rooms" element={<h1>Rooms</h1>}/>
+          <Route path="/rooms" element={<AdminRooms/>}/>
           <Route path="/reviews" element={<h1>Reviews</h1>}/>
           <Route path="/users" element={<h1>Users</h1>}/>
+          <Route path="/rooms/add" element={<AdminAddRooms/>}/>
 
       </Routes>
       
