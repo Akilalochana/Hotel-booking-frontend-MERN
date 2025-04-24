@@ -7,6 +7,7 @@ import { FaUserCog } from "react-icons/fa";
 import { Link, Route, Routes } from "react-router-dom";
 import { AdminRooms } from "./adminRomms";
 import AdminAddRooms from "./adminAddRooms";
+import UpdateRooms from "./updateRooms";
 
 export default function AdminDashboard() {
   return(
@@ -52,6 +53,7 @@ export default function AdminDashboard() {
           <Route path="/reviews" element={<h1>Reviews</h1>}/>
           <Route path="/users" element={<h1>Users</h1>}/>
           <Route path="/rooms/add" element={<AdminAddRooms/>}/>
+          <Route path="/rooms/edit" element={<UpdateRooms/>}/>
 
       </Routes>
       
