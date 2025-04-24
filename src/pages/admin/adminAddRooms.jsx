@@ -21,7 +21,7 @@ export default function AdminAddRooms() {
 
     if(token){
       try{
-        const results = await axios.post("http://localhost:3000/api/products",{
+        const results = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`,{
           key: roomKey,
           name: roomName,
           price: roomPrice,

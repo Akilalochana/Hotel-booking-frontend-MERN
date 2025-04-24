@@ -14,7 +14,7 @@ export default function LoginPage() {
     e.preventDefault();
     console.log("submited")
 
-    axios.post(backendUrl+"/api/users/login",
+    axios.post(`${backendUrl}/api/users/login`,
       {
       email: email,
       password: password
