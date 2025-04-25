@@ -4,3 +4,9 @@ body{
   background-color: #111;
   color: #bbb;
 }
+
+@theme{
+  --color-primary: #111; 
+  --color-secondary: #bbb;
+  --color-accent: #53c28b;
+}
