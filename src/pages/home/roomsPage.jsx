@@ -32,7 +32,7 @@ export default function RoomsPage() {
       {state === "success" && 
       rooms.map((room)=>{
         return(
-          <div>
+          <div key={room._id}>
             <ProductCard room={room}/>
           </div>
           

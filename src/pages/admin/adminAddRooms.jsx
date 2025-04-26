@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import mediaUpload from "../../../utils/mediaUpload";
 
 export default function AdminAddRooms() {
   const [roomKey, setRoomKey] = useState("");
@@ -10,10 +11,23 @@ export default function AdminAddRooms() {
   const [roomType, setRoomType] = useState("NON AC");
   const [roomDescription, setRoomDescription] = useState("");
   const [bedRooms, setBedRooms] = useState("0");
+  const [roomImages, setRoomImages] = useState([]);
 
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
+    const promises = [];
+
+    for(let i = 0; i < roomImages.length; i++){
+      console.log(roomImages[i])
+      const promise = mediaUpload(roomImages[i])
+      promises.push(promise)
+      // if(i ==5){
+      //   toast.error("You can only upload 5 images at a time")
+      //   break
+      // }
+    }
+
 
     console.log(roomKey, roomName, roomPrice, roomType, roomDescription, bedRooms);
 
@@ -21,13 +35,24 @@ export default function AdminAddRooms() {
 
     if(token){
       try{
+             // Promise.all(promises).then((result)=>{
+              //   console.log(result)
+
+             // }).catch((err)=>{
+             //   toast.error(err)
+            // })
+        const imageUrls = await Promise.all(promises)
+
+
+
         const results = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`,{
           key: roomKey,
           name: roomName,
           price: roomPrice,
           category: roomType,
           description: roomDescription,
-          bedRomms: bedRooms
+          bedRomms: bedRooms,
+          image: imageUrls
   
         },{
           headers:{
@@ -125,6 +150,7 @@ export default function AdminAddRooms() {
               required
             />
           </div>
+          <input type="file" multiple onChange={(e) => setRoomImages(e.target.files)}/>
 
           <button
             onClick={handleSubmit}
