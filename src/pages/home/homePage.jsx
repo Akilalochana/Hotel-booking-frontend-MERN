@@ -5,6 +5,7 @@ import GalleryPage from "./galleryPage";
 import RoomsPage from "./roomsPage";
 import ErrorPage from "./errorPage";
 import Home from "./home";
+import RoomOverview from "./roomOverview";
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
         <Route path="/gallery" element={<GalleryPage/>}/>
         <Route path="/rooms" element={<RoomsPage/>}/>
         <Route path="/" element={<Home/>}/>
+        <Route path='/product/:key' element={<RoomOverview/>}/>
 
         <Route path="/*" element={<ErrorPage/>}/>
       </Routes>

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
+import mediaUpload from "../../../utils/mediaUpload";
 
 export default function UpdateRooms() {
   const navigate = useNavigate();
@@ -14,10 +15,25 @@ export default function UpdateRooms() {
   const [roomType, setRoomType] = useState(location.state.category);
   const [roomDescription, setRoomDescription] = useState(location.state.description);
   const [bedRooms, setBedRooms] = useState(location.state.bedRomms);
+  const [roomImages, setRoomImages] = useState([]);
 
  
 
   async function handleSubmit(e) {
+
+    let updatingImages = location.state.image
+
+    if(roomImages.length >0){
+        const promises = [];
+
+        for(let i = 0; i < roomImages.length; i++){
+          console.log(roomImages[i])
+                const promise = mediaUpload(roomImages[i])
+                promises.push(promise)
+            
+              }
+              updatingImages = await Promise.all(promises)
+    }
 
     console.log(roomKey, roomName, roomPrice, roomType, roomDescription, bedRooms);
 
@@ -31,7 +47,8 @@ export default function UpdateRooms() {
           price: roomPrice,
           category: roomType,
           description: roomDescription,
-          bedRomms: bedRooms
+          bedRomms: bedRooms,
+          image: updatingImages
   
         },{
           headers:{
@@ -131,6 +148,8 @@ export default function UpdateRooms() {
               required
             />
           </div>
+
+          <input type="file" multiple onChange={(e) => setRoomImages(e.target.files)}/>
 
           <button
             onClick={handleSubmit}

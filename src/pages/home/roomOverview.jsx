@@ -1,0 +1,56 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom"
+import ImageSlider from "../../components/imageSlider";
+
+export default function RoomOverview() {
+  const params = useParams();
+  console.log(params)// can get key when pass with Url
+  const key = params.key
+
+  const [loadingStatus, setLoadingStatus] = useState("loading")//loding,loaded,error
+
+  const [room, setRoom] = useState({});
+
+  useEffect(()=>{
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${key}`).then((res)=>{
+      setRoom(res.data)
+      setLoadingStatus("loaded")
+      console.log(res.data)
+    }).catch((err)=>{
+      console.log(err)
+      setLoadingStatus("error")
+    })
+  },[])
+    
+
+
+  return (
+    <div className="w-full min-h-screen text-[#bbb] flex justify-center items-center p-6">
+      {loadingStatus === "loading" && (
+        <div className="flex justify-center items-center w-full h-full">
+          <div className="w-[50px] h-[50px] border-4 border-t-[#53c28b] border-[#bbb] rounded-full animate-spin"></div>
+        </div>
+      )}
+
+      {loadingStatus === "loaded" && (
+        <div className="w-full max-w-6xl flex flex-col md:flex-row gap-8 items-center bg-[#1a1a1a] p-4 rounded-xl shadow-lg mt-[-100px]">
+          
+          <div className="w-full md:w-1/2">
+            <ImageSlider images={room.image} />
+          </div>
+
+          <div className="w-full md:w-1/2 flex flex-col gap-4">
+            <h1 className="text-3xl font-bold text-[#53c28b]">{room.name}</h1>
+            <h2 className="text-xl">{room.category}</h2>
+            <p className="text-md leading-relaxed">{room.description}</p>
+            <p className="text-lg font-semibold">Price: Rs. {room.price}</p>
+            <p className="text-lg">Bedrooms: {room.bedRomms}</p>
+          </div>
+
+        </div>
+      )}
+      
+    </div>
+  );
+}
