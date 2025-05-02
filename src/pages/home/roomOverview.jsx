@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import ImageSlider from "../../components/imageSlider";
+import { addToCart, loadCart } from "../../../utils/cart";
 
 export default function RoomOverview() {
   const params = useParams();
@@ -46,7 +47,15 @@ export default function RoomOverview() {
             <p className="text-md leading-relaxed">{room.description}</p>
             <p className="text-lg font-semibold">Price: Rs. {room.price}</p>
             <p className="text-lg">Bedrooms: {room.bedRomms}</p>
+            
+
+            <button className="mt-5 bg-[#53c28b] hover:bg-[#53c28b70] text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300" onClick={()=>{
+              addToCart(room.key,1)
+              console.log(loadCart())
+            }}> Add to cart </button>
           </div>
+          
+
 
         </div>
       )}
