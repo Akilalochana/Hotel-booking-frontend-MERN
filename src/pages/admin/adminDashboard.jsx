@@ -9,10 +9,36 @@ import { AdminRooms } from "./adminRomms";
 import AdminAddRooms from "./adminAddRooms";
 import UpdateRooms from "./updateRooms";
 import AdminUsersPage from "./adminUsersPage";
-import AdminBookingPage from "./adminBookingPage";
 import AdminOrdersPage from "./adminBookingPage";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function AdminDashboard() {
+  const [userValidated, setUserValidated] = useState(false);
+  useEffect(()=>{
+    const token = localStorage.getItem("token");
+    if(!token){
+      window.location.href = "/login";
+    }
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/`,{
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    }).then((res)=>{
+      console.log(res.data);
+      const user = res.data;
+      if(user.role == "admin"){
+        setUserValidated(true);        
+      }else{
+        window.location.href = "/";
+      }
+      
+    }).catch((err)=>{
+      console.error(err);
+      setUserValidated(false);
+    })
+  },[])
+
   return(
     <div className='w-full h-screen flex'>
 
