@@ -9,6 +9,8 @@ import { AdminRooms } from "./adminRomms";
 import AdminAddRooms from "./adminAddRooms";
 import UpdateRooms from "./updateRooms";
 import AdminUsersPage from "./adminUsersPage";
+import AdminBookingPage from "./adminBookingPage";
+import AdminOrdersPage from "./adminBookingPage";
 
 export default function AdminDashboard() {
   return(
@@ -25,9 +27,9 @@ export default function AdminDashboard() {
         Dashboard
       </button>
 
-      <Link to="/admin/booking" className='w-full h-[50px] text-2xl font-bold   flex justify-center items-center gap-1'>
+      <Link to="/admin/orders" className='w-full h-[50px] text-2xl font-bold   flex justify-center items-center gap-1'>
         <FaBookBookmark/>
-        Bookings
+        orders
       </Link>
 
       <Link to='/admin/rooms' className='w-full h-[50px] text-2xl font-bold   flex justify-center items-center gap-1'>
@@ -49,7 +51,7 @@ export default function AdminDashboard() {
 
     <div className='w-[calc(100vw-400px)] h-full '>
       <Routes path="/*">
-          <Route path="/booking" element={<h1>Booking</h1>}/>
+          <Route path="/orders" element={<AdminOrdersPage/>}/>
           <Route path="/rooms" element={<AdminRooms/>}/>
           <Route path="/reviews" element={<h1>Reviews</h1>}/>
           <Route path="/users" element={<AdminUsersPage/>}/>
