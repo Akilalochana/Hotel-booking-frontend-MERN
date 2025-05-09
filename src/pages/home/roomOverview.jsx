@@ -35,7 +35,7 @@ export default function RoomOverview() {
       )}
 
       {loadingStatus === "loaded" && (
-        <div className="w-full max-w-6xl flex flex-col md:flex-row gap-8 items-center bg-[#1a1a1a] p-4 rounded-xl shadow-lg mt-[-100px]">
+        <div className="w-[350px] flex flex-col md:flex-row gap-8 items-center   bg-[#1a1a1a] p-4 rounded-xl shadow-lg   mb-[50px] ">
           
           <div className="w-full md:w-1/2">
             <ImageSlider images={room.image} />
