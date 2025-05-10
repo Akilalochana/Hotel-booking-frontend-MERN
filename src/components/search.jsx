@@ -75,7 +75,7 @@ export default function Search() {
         </div>
       </div>
       
-      <button className="w-full bg-accent hover:bg-green-500 text-white py-1.5 rounded font-medium transition ">
+      <button className="w-full bg-[#53c28b] hover:bg-green-500 text-white py-1.5 rounded font-medium transition ">
         Search Availability
       </button>
     </div>

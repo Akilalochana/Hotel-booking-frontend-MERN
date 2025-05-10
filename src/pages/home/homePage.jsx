@@ -7,6 +7,7 @@ import ErrorPage from "./errorPage";
 import Home from "./home";
 import RoomOverview from "./roomOverview";
 import BookingPage from "./booking";
+import RoomHome from "./roomHome";
 
 export default function HomePage() {
   return (
@@ -20,6 +21,7 @@ export default function HomePage() {
         <Route path="/gallery" element={<GalleryPage/>}/>
         <Route path="/rooms" element={<RoomsPage/>}/>
         <Route path='/booking' element={<BookingPage/>}/>
+        <Route path='/roomHome' element={<RoomHome/>}/>
         <Route path="/" element={<Home/>}/>
         <Route path='/product/:key' element={<RoomOverview/>}/>
 
