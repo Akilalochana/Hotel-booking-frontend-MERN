@@ -1,9 +1,14 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ChatbotIcon() {
   const [isOpen, setIsOpen] = useState(false);
   const [pulsing, setPulsing] = useState(true);
+  const [messages, setMessages] = useState([
+    { text: "Hello! I'm Hotel Win Win's chatbot. How can I help you today?", sender: "bot" }
+  ]);
+  const [inputValue, setInputValue] = useState("");
+  const messagesEndRef = useRef(null);
   
   // Colors for gradient animation
   const colors = [
@@ -35,30 +40,128 @@ export default function ChatbotIcon() {
     return () => clearTimeout(timeout);
   }, []);
   
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+  
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    if (!inputValue.trim()) return;
+    
+    // Add user message
+    setMessages(prev => [...prev, { text: inputValue, sender: "user" }]);
+    setInputValue("");
+    
+    // Simulate bot response after a delay
+    setTimeout(() => {
+      const responses = [
+        "I'd be happy to help with that!",
+        "Let me check that for you...",
+        "Our front desk can assist you with that. Would you like me to connect you?",
+        "For room service, please dial extension 2 from your room phone.",
+        "Our pool hours are from 7AM to 10PM daily.",
+        "You can find information about local attractions in our guest booklet."
+      ];
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+      setMessages(prev => [...prev, { text: randomResponse, sender: "bot" }]);
+    }, 1000);
+  };
+  
   return (
     <div className="fixed bottom-8 right-8 z-50">
-      {isOpen && (
-        <motion.div 
-          className="bg-white rounded-lg p-4 mb-4 shadow-lg"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-        >
-          <div className="w-64">
-            <p className="font-semibold mb-2">Hotel Win Win Chatbot</p>
-            <p className="text-sm text-gray-600 mb-2">How can I help you today?</p>
-            <div className="flex justify-end">
-              <button 
-                className="text-sm px-3 py-1 bg-purple-100 text-purple-700 rounded-full hover:bg-purple-200 transition-colors"
-                onClick={() => setIsOpen(false)}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            className="bg-white rounded-lg shadow-lg overflow-hidden"
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+          >
+            <div className="w-80 h-96 flex flex-col">
+              {/* Header */}
+              <div 
+                className="p-4 flex items-center justify-between text-white font-semibold"
+                style={{
+                  background: `linear-gradient(135deg, ${colors[colorIndex]}, ${colors[(colorIndex + 2) % colors.length]})`
+                }}
               >
-                Close
-              </button>
+                <div className="flex items-center">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 24 24" 
+                    className="w-5 h-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                  </svg>
+                  <span>Hotel Win Win Assistant</span>
+                </div>
+                <button 
+                  onClick={() => setIsOpen(false)}
+                  className="text-white hover:text-gray-200"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+              
+              {/* Messages */}
+              <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
+                {messages.map((message, index) => (
+                  <motion.div
+                    key={index}
+                    className={`mb-3 flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div 
+                      className={`max-w-xs p-3 rounded-lg ${message.sender === "user" 
+                        ? "bg-blue-500 text-white rounded-br-none" 
+                        : "bg-white text-gray-800 rounded-bl-none shadow"}`}
+                    >
+                      {message.text}
+                    </div>
+                  </motion.div>
+                ))}
+                <div ref={messagesEndRef} />
+              </div>
+              
+              {/* Input area */}
+              <form onSubmit={handleSendMessage} className="p-3 border-t border-gray-200 bg-white">
+                <div className="flex">
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    placeholder="Type your message..."
+                    className="flex-1 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  <button
+                    type="submit"
+                    className="ml-2 p-2 rounded-full text-white"
+                    style={{
+                      background: `linear-gradient(135deg, ${colors[colorIndex]}, ${colors[(colorIndex + 2) % colors.length]})`
+                    }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
+              </form>
             </div>
-          </div>
-        </motion.div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
       
+      {/* Chat button */}
       <motion.div
         className="relative cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
@@ -90,7 +193,6 @@ export default function ChatbotIcon() {
             background: `linear-gradient(135deg, ${colors[colorIndex]}, ${colors[(colorIndex + 2) % colors.length]})`
           }}
         >
-          {/* Message bubble icon */}
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 24 24" 
@@ -147,19 +249,21 @@ export default function ChatbotIcon() {
         </motion.div>
         
         {/* Notification dot */}
-        <motion.div 
-          className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{
-            type: "spring",
-            stiffness: 500,
-            damping: 15,
-            delay: 1
-          }}
-        >
-          1
-        </motion.div>
+        {!isOpen && (
+          <motion.div 
+            className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 500,
+              damping: 15,
+              delay: 1
+            }}
+          >
+            1
+          </motion.div>
+        )}
       </motion.div>
     </div>
   );

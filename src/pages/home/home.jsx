@@ -30,7 +30,7 @@ export default function Home() {
         </div>  
         <Search/>
         <div className="w-[100px] h-[100px] fixed ml-[1300px] mt-[500px]">
-          <ChatbotIcon className/>
+          <ChatbotIcon/>
         </div>
         {/* <div className="w-[100px] h-[100px] fixed ml-[1300px] mt-[10px] ">
           <ScratchToRevealDemo/>
