@@ -8,6 +8,7 @@ import Home from "./home";
 import RoomOverview from "./roomOverview";
 import BookingPage from "./booking";
 import RoomHome from "./roomHome";
+import { ReviewPage } from "./review";
 
 export default function HomePage() {
   return (
@@ -22,6 +23,7 @@ export default function HomePage() {
         <Route path="/rooms" element={<RoomsPage/>}/>
         <Route path='/booking' element={<BookingPage/>}/>
         <Route path='/roomHome' element={<RoomHome/>}/>
+        <Route path="/review" element={<ReviewPage/>}/>
         <Route path="/" element={<Home/>}/>
         <Route path='/product/:key' element={<RoomOverview/>}/>
 

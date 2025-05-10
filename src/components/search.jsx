@@ -6,17 +6,25 @@ export default function Search() {
   const [guests, setGuests] = useState('1 Guest');
 
   return (
-    <div className="w-full max-w-lg p-6 bg-[#111] mt-[350px] mr-[840px] rounded-lg text-white">
+    // <div className="w-full max-w-lg p-6 bg-[#111] mt-[350px] mr-[840px] rounded-lg text-white">
+     <div className="w-[300px] md:w-full h-[300px] max-w-lg p-6 bg-black/70 mt-[350px] mr-[10px] md:mr-[840px] rounded-lg text-white">
       <h2 className="text-xl font-bold mb-4">Book Your Stay</h2>
       
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
           <label className="block text-gray-300 text-sm mb-2">Check-in Date</label>
           <div className="relative">
-            <input
+            {/* <input
               type="text"
               placeholder="mm/dd/yyyy"
               className="w-full  text-white p-1.5 rounded pl-3 pr-10 border border-gray-700"
+              value={checkInDate}
+              onChange={(e) => setCheckInDate(e.target.value)}
+            /> */}
+             <input
+              type="text"
+              placeholder="mm/dd/yyyy"
+              className="w-full  text-white p-1 md:p-1.5 rounded pl-3 pr-10 border border-gray-700"
               value={checkInDate}
               onChange={(e) => setCheckInDate(e.target.value)}
             />
@@ -37,7 +45,7 @@ export default function Search() {
             <input
               type="text"
               placeholder="mm/dd/yyyy"
-              className="w-full  text-white p-1.5 rounded pl-3 pr-10 border border-gray-700"
+              className="w-full  text-white p-1 md:p-1.5 rounded pl-3 pr-10 border border-gray-700"
               value={checkOutDate}
               onChange={(e) => setCheckOutDate(e.target.value)}
             />
@@ -57,7 +65,7 @@ export default function Search() {
         <label className="block text-gray-300 text-sm mb-2">Guests</label>
         <div className="relative">
           <select
-            className="w-full appearance-none text-white p-1.5 rounded border border-gray-700"
+            className="w-full appearance-none text-white p-1 md:p-1.5 rounded border border-gray-700"
             value={guests}
             onChange={(e) => setGuests(e.target.value)}
           >
@@ -75,7 +83,7 @@ export default function Search() {
         </div>
       </div>
       
-      <button className="w-full bg-[#53c28b] hover:bg-green-500 text-white py-1.5 rounded font-medium transition ">
+      <button className="w-full bg-[#53c28b] hover:bg-green-500 text-white py-1 md:p-1.5 rounded font-medium transition ">
         Search Availability
       </button>
     </div>

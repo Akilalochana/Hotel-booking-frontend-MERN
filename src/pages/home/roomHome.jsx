@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../../components/productCard";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 export default function RoomHome() {
   const [rooms, setRooms] = useState([]);
@@ -42,7 +43,8 @@ export default function RoomHome() {
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center pb-12">
-      {/* Header Section */}
+
+
       <div className="w-full max-w-2xl px-4 py-8 flex flex-col justify-center items-center text-center">
         <h1 className="text-4xl font-extrabold mb-3">Exclusive Rooms & Suites</h1>
         <p className="text-gray-600">
@@ -50,12 +52,12 @@ export default function RoomHome() {
         </p>
       </div>
 
-      {/* Filter Buttons */}
+
       <div className="w-full max-w-lg mb-8 px-4 flex justify-center items-center gap-4">
         <button 
           className={`${
             activeFilter === "all" ? "bg-[#4bbb83]" : "bg-[#53c28b]"
-          } hover:bg-[#53c28b70] text-white py-2 px-6 rounded-md transition-colors duration-300`}
+          } hover:bg-[#53c28b70] text-white py-1 px-6 text-[12px] md:text-[15px]  rounded-[4px] transition-colors duration-300`}
           onClick={() => handleFilter("all")}
         >
           All Rooms
@@ -64,7 +66,7 @@ export default function RoomHome() {
         <button 
           className={`${
             activeFilter === "couple" ? "bg-[#4bbb83]" : "bg-[#53c28b]"
-          } hover:bg-[#53c28b70] text-white py-2 px-6 rounded-md transition-colors duration-300`}
+          } hover:bg-[#53c28b70] text-white py-1 px-6 text-[12px] md:text-[15px] rounded-[4px] transition-colors duration-300`}
           onClick={() => handleFilter("couple")}
         >
           Couple Rooms
@@ -73,35 +75,46 @@ export default function RoomHome() {
         <button 
           className={`${
             activeFilter === "family" ? "bg-[#4bbb83]" : "bg-[#53c28b]"
-          } hover:bg-[#53c28b70] text-white py-2 px-6 rounded-md transition-colors duration-300`}
+          } hover:bg-[#53c28b70] text-white py-1 px-6 text-[12px] md:text-[15px] rounded-[4px] transition-colors duration-300`}
           onClick={() => handleFilter("family")}
         >
           Family Rooms
         </button>
       </div>
 
-      {/* Rooms Display */}
+ 
       <div className="w-full max-w-6xl px-4">
         {loading ? (
           <div className="w-full flex justify-center items-center py-12">
             <div className="w-12 h-12 border-4 rounded-full border-t-[#4ce498] animate-spin"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredRooms.length > 0 ? (
-              filteredRooms.map((room) => (
-                <div key={room._id}>
-                  <ProductCard room={room} />
-                </div>
-              ))
-            ) : (
-              <div className="col-span-3 text-center py-12">
-                <p className="text-gray-500 text-lg">No rooms found in this category.</p>
-              </div>
-            )}
-          </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredRooms.length > 0 ? (
+                  filteredRooms.slice(0, 3).map((room) => (
+                    <div key={room._id}>
+                      <ProductCard room={room} />
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-span-3 text-center py-12">
+                    <p className="text-gray-500 text-lg">No rooms found in this category.</p>
+                  </div>
+                )}
+            </div>
         )}
       </div>
+
+      <div className="w-full flex justify-center mt-8">
+        <Link
+          to="/rooms"
+          className="px-6 py-2 bg-transparent text-[#4bbb83] border border-[#4bbb83] rounded-[4px] hover:bg-[#4bbb83] hover:text-white transition duration-300 flex items-center gap-2"
+        >
+          View All Rooms
+          <span className="text-lg">→</span>
+        </Link>
+      </div>
+
     </div>
   );
 }

@@ -58,7 +58,7 @@ export default function ProductCard({ room }) {
 
           <Link
             to={"/product/" + room.key}
-            className="bg-green-500 hover:bg-green-600 text-white font-medium py-1.5 px-4 rounded-lg transition-colors duration-300"
+            className="bg-[#53c28b] hover:bg-green-600 text-white font-medium py-1.5 px-4 rounded-[4px] transition-colors duration-300"
           >
             Book Now
           </Link>
