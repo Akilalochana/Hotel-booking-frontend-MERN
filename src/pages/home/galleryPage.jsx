@@ -37,7 +37,7 @@ export default function GalleryPage() {
       </div>
 
 
-      <div className="w-[1300px] mt-[50px]">
+      <div className="w-[1200px] mt-[50px]">
         <section id="photos">
           <div className="columns-2 gap-4 sm:columns-3">
             {images.map((imageUrl, idx) => (

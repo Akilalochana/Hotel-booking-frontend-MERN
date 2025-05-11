@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import "./login.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -40,9 +41,9 @@ export default function LoginPage() {
 
 
   return (
-    <div className="min-h-screen bg-[#111] text-[#bbb] flex items-center justify-center">
+    <div className="min-h-screen bg-picture text-[#bbb] flex items-center justify-center">
 
-      <div className="bg-[#1c1c1c] p-8 rounded-2xl shadow-lg w-[400px]">
+      <div className="bg-black/70 p-8 rounded-2xl shadow-lg w-[400px]">
         <div className="flex flex-col items-center mb-6">
 
           <img
