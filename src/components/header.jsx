@@ -21,16 +21,21 @@ export default function Header() {
         <Link to="/" className="hidden md:block text-[15px] m-1">
           Home
         </Link>
-        <Link to="/contact" className="hidden md:block text-[15px] m-1">
-          contact
+
+         <Link to="/rooms" className="hidden md:block text-[15px] m-1">
+          Rooms
         </Link>
+
         <Link to="/gallery" className="hidden md:block text-[15px] m-1">
           gallery
         </Link>
-        {/* items */}
-        <Link to="/rooms" className="hidden md:block text-[15px] m-1">
-          Rooms
+        
+        <Link to="/contact" className="hidden md:block text-[15px] m-1">
+          contact
         </Link>
+        
+        
+       
         
         <Link to="/booking" className="hidden md:block text-[15px] font-bold m-1 absolute right-24">
           <FaCartShopping />

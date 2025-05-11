@@ -1,8 +1,10 @@
+import { Footer } from '@/components/footer';
 import React from 'react';
 
-export default function ContactPage() {
-  return (
-    <div className="min-h-[calc(100vh-80px)]  flex flex-col items-center py-12 px-4 bg-[#070707]">
+export default function ContactUsPage() {
+   return (
+    <>
+    <div className="min-h-[calc(100vh-80px)]  flex flex-col mt-[40px] items-center py-12 px-4 bg-[#070707]">
       {/* Header */}
       <div className="w-full max-w-6xl text-center mb-6">
         <h1 className="text-4xl font-bold  mb-3">Contact Us</h1>
@@ -144,5 +146,7 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }

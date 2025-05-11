@@ -24,12 +24,13 @@ export default function RoomsPage() {
 
 
   return (
-    <div className="w-full h-full flex flex-wrap justify-center pt-[30px] gap-[50px]">
-
+    <div className="w-full h-full flex flex-wrap justify-center mt-[100px] pt-[30px] gap-[50px]">
+      
       {state === "loading" && <div className="w-full h-full flex justify-center items-center ">
         <div className="w-[50px] h-[50px] border-4 rounded-full border-t-[#4ce498] animate-spin"></div></div>}
 
       {state === "success" && 
+      
       rooms.map((room)=>{
         return(
           <div key={room._id}>

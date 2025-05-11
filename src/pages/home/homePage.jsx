@@ -9,6 +9,7 @@ import RoomOverview from "./roomOverview";
 import BookingPage from "./booking";
 import RoomHome from "./roomHome";
 import { ReviewPage } from "./review";
+import ContactUsPage from "./contactUsPage";
 
 export default function HomePage() {
   return (
@@ -18,7 +19,7 @@ export default function HomePage() {
 
     <div className="w-full h-[calc(100vh-80px)] ">
       <Routes path="/*">
-        <Route path="/contact" element={<ContactPage/>}/>
+        <Route path="/contact" element={<ContactUsPage/>}/>
         <Route path="/gallery" element={<GalleryPage/>}/>
         <Route path="/rooms" element={<RoomsPage/>}/>
         <Route path='/booking' element={<BookingPage/>}/>
