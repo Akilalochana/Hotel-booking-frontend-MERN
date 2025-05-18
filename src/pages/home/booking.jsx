@@ -60,8 +60,9 @@ import { formatDate, loadCart } from "../../../utils/cart";
      }
  
      return(
-         <div className="w-full h-full flex flex-col items-center ">
-             <h1 className="text-2xl font-bold text-accent">Create Booking</h1>
+         <div className="w-full h-full flex flex-col mt-[100px] items-center ">
+            <div className="w-[500px] h-[500px] bg-black/70  flex flex-col justify-center items-center">
+             <h1 className="text-4xl font-bold text-accent mb-[50px]">Create Booking</h1>
              <div className="w-full flex flex-col items-center gap-4 mt-4">
                  <label className="flex flex-col">
                      <span className="text-accent font-semibold">Starting Date:</span>
@@ -94,8 +95,9 @@ import { formatDate, loadCart } from "../../../utils/cart";
                  <p className="text-accent font-semibold">Total: {total.toFixed(2)}</p>
              </div>
              <div className="w-full flex justify-center mt-4">
-                 <button className="bg-accent text-white px-4 py-2 rounded-md" onClick={handleBookingCreation}>Create Booking</button>
+                 <button className="bg-[#5e5e5e] text-white px-4 py-2 rounded-md" onClick={handleBookingCreation}>Create Booking</button>
              </div>
+         </div>
          </div>
      )
  }

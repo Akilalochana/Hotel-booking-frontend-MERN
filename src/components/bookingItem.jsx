@@ -34,7 +34,7 @@ import { addToCart, removeFromCart } from "../../utils/cart";
  	}
  
  	return (
- 		<div className="flex w-[600px] my-2 items-center gap-4 p-4 bg-primary shadow-md rounded-lg border border-secondary relative">
+ 		<div className="flex w-[300px] my-2 items-center gap-4 p-4 bg-primary shadow-md rounded-lg border border-secondary absolute">
              <div className="absolute right-[-45px]  text-red-500 hover:text-white hover:bg-red-500 p-[10px] rounded-full  cursor-pointer">
              <FaTrash onClick={() => {
                  removeFromCart(itemKey);
@@ -52,7 +52,7 @@ import { addToCart, removeFromCart } from "../../utils/cart";
  			{/* Product Details */}
  			<div className="flex flex-row items-center relative  w-full">
  				<h3 className="text-lg font-semibold text-accent">{item.name}</h3>
- 				<div className="flex absolute right-0 gap-4">
+ 				{/* <div className="flex absolute right-0 gap-4">
  					<p className="font-medium w-[70px] text-center">
  						{item.price.toFixed(2)}
  					</p>
@@ -85,7 +85,7 @@ import { addToCart, removeFromCart } from "../../utils/cart";
  					<p className="text-lg font-semibold text-accent">
  						{(item.price * qty).toFixed(2)}
  					</p>
- 				</div>
+ 				</div> */}
  			</div>
  		</div>
  	);

@@ -41,7 +41,7 @@ export default function Header() {
         <Link to="/booking" className="hidden md:block text-[15px] font-bold m-1 absolute right-24">
           <ShimmerButton className="shadow-2xl ">
           <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 text-[15px]">
-            Book Now
+            your booking
           </span>
          </ShimmerButton>
         </Link>

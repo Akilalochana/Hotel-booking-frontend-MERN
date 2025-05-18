@@ -35,7 +35,7 @@ export default function Register() {
 
   return (
     <div className="bg-picture w-full h-screen flex justify-center items-center text-[#bbb]">
-      <div className="w-[500px] backdrop-blur-2xl bg-[#1c1c1c] p-8 rounded-2xl shadow-lg">
+      <div className="w-[500px] backdrop-blur-2xl bg-black/70 p-8 rounded-2xl shadow-lg">
         <div className="flex flex-col items-center mb-6">
           <img
             src="/logo.png"

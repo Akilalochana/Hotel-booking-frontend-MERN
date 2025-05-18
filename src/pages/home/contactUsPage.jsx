@@ -1,5 +1,6 @@
 import { Footer } from '@/components/footer';
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function ContactUsPage() {
    return (
@@ -7,7 +8,15 @@ export default function ContactUsPage() {
     <div className="min-h-[calc(100vh-80px)]  flex flex-col mt-[40px] items-center py-12 px-4 bg-[#070707]">
       {/* Header */}
       <div className="w-full max-w-6xl text-center mb-6">
-        <h1 className="text-4xl font-bold  mb-3">Contact Us</h1>
+         <motion.h1
+            className="text-5xl font-bold mb-3"
+            initial={{ opacity: 0, y: -40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            Contact Us
+          </motion.h1>
+          
         <p className="text-gray-600">Have questions or need assistance? Reach out to our dedicated team.</p>
       </div>
 

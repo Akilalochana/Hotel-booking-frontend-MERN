@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from "react-router-dom";
 
 export default function Search() {
   const [checkInDate, setCheckInDate] = useState('');
@@ -83,9 +84,9 @@ export default function Search() {
         </div>
       </div>
       
-      <button className="w-full bg-[#53c28b] hover:bg-green-500 text-white py-1 md:p-1.5 rounded font-medium transition ">
+      <Link to="/rooms" className="w-full bg-[#53c28b] hover:bg-green-500 text-white py-1 md:p-1.5 rounded font-medium transition ">
         Search Availability
-      </button>
+      </Link>
     </div>
   );
 }
