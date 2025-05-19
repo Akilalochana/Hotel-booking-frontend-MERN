@@ -49,8 +49,8 @@ export default function AdminUsersPage() {
   return (
     <div className="p-6 overflow-x-auto">
       <h1 className="text-2xl font-bold mb-6 text-center">All Users</h1>
-      <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
-        <thead className="bg-gray-100">
+      <table className="min-w-full bg-111 border-gray-300 rounded-lg shadow-md">
+        <thead className="bg-gray-100 text-black">
           <tr>
             <th className="py-3 px-4 border-b text-left">#</th>
             <th className="py-3 px-4 border-b text-left">Profile</th>
@@ -79,8 +79,8 @@ export default function AdminUsersPage() {
               <td className="py-3 px-4 border-b">{user.email}</td>
               <td className="py-3 px-4 border-b">{user.phone}</td>
               <td className="py-3 px-4 border-b">{user.address}</td>
-              <td className="py-3 px-4 border-b capitalize text-blue-600 font-medium">{user.role}</td>
-              <td onClick={()=>{handleBlockUser(user.email)}} className="py-3 px-4 border-b capitalize text-blue-600 font-medium cursor-pointer hover:text-green-600">{user.isBlocked? "Blocked" : "Active"}</td>
+              <td className="py-3 px-4 border-b capitalize text-green-600 font-medium">{user.role}</td>
+              <td onClick={()=>{handleBlockUser(user.email)}} className="py-3 px-4 border-b capitalize text-green-600 font-medium cursor-pointer hover:text-blue-600">{user.isBlocked? "Blocked" : "Active"}</td>
             </tr>
           ))}
         </tbody>

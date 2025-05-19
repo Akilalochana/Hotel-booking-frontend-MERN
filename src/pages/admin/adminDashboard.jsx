@@ -42,8 +42,8 @@ export default function AdminDashboard() {
   return(
     <div className='w-full h-screen flex'>
 
-    <div className='w-[400px] h-full border-[#bbb] border-r-2 '>
-      <div className="flex h-[50px] font-bold text-2xl justify-center items-center mb-10">
+    <div className='w-[250px] h-full border-[#bbb] border-r-2 '>
+      <div className="flex h-[50px] font-bold text-4xl justify-center items-center mb-10">
          Admin Page
       </div>
       

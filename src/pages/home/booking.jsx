@@ -1,103 +1,74 @@
+import BookingCard from "@/components/bookingCard";
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
- import BookingItem from "../../components/bookingItem";
- import axios from "axios";
- import toast from "react-hot-toast";
- import { use } from "react";
-import { formatDate, loadCart } from "../../../utils/cart";
- 
- export default function BookingPage(){
-     const [cart, setCart] = useState(loadCart());
-     const [startingDate, setStartingDate] = useState(formatDate(new Date()));
-     const [endingDate, setEndingDate] = useState(formatDate(new Date(Date.now() + 24 * 60 * 60 * 1000)));
-     const [total , setTotal] = useState(0);
-     const daysBetween = Math.max((new Date(endingDate) - new Date(startingDate)) / (1000 * 60 * 60 * 24), 1);
- 
-     function reloadCart(){
-         setCart(loadCart());
-         calculateTotal();
-         
-     }
-     function calculateTotal(){
-         const cartInfo = loadCart();
-         cartInfo.startingDate = startingDate;
-         cartInfo.endingDate = endingDate;
-         cartInfo.days = daysBetween;
-         axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/orders/quote`,
-             cartInfo
-         ).then((res)=>{
-             console.log(res.data)
-             setTotal(res.data.total);
-         }).catch((err)=>{   
-             console.error(err);
-         })
-     }
- 
-     useEffect(()=>{
-         calculateTotal();
-     },[startingDate, endingDate])
-     
-     function handleBookingCreation(){
-         const cart = loadCart();
-         cart.startingDate = startingDate;
-         cart.endingDate = endingDate;
-         cart.days = daysBetween;
- 
-         const token = localStorage.getItem("token");
-         axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/orders`, cart, {
-             headers: {
-                 Authorization: `Bearer ${token}`
-             }
-         }).then((res)=>{
-             console.log(res.data);
-             localStorage.removeItem("cart");
-             toast.success("Booking Created");
-             setCart(loadCart());
-         }).catch((err)=>{
-             console.error(err);
-             toast.error("Failed to create booking");
-         })
-     }
- 
-     return(
-         <div className="w-full h-full flex flex-col mt-[100px] items-center ">
-            <div className="w-[500px] h-[500px] bg-black/70  flex flex-col justify-center items-center">
-             <h1 className="text-4xl font-bold text-accent mb-[50px]">Create Booking</h1>
-             <div className="w-full flex flex-col items-center gap-4 mt-4">
-                 <label className="flex flex-col">
-                     <span className="text-accent font-semibold">Starting Date:</span>
-                     <input 
-                         type="date" 
-                         value={startingDate} 
-                         onChange={(e) => setStartingDate(e.target.value)} 
-                         className="border border-secondary rounded-md p-2" 
-                     />
-                 </label>
-                 <label className="flex flex-col">
-                     <span className="text-accent font-semibold">Ending Date:</span>
-                     <input 
-                         type="date" 
-                         value={endingDate} 
-                         onChange={(e) => setEndingDate(e.target.value)} 
-                         className="border border-secondary rounded-md p-2" 
-                     />
-                 </label>
-                 <p className="text-accent font-medium">Total Days: {daysBetween}</p>
-             </div>
-             <div className="w-full flex flex-col items-center mt-4">
-                 {
-                     cart.orderedItems.map((item)=>{
-                         return <BookingItem itemKey={item.key} key={item.key} qty={item.qty} refresh={reloadCart}/>
-                     })
-                 }
-             </div>
-             <div className="w-full flex justify-center mt-4">
-                 <p className="text-accent font-semibold">Total: {total.toFixed(2)}</p>
-             </div>
-             <div className="w-full flex justify-center mt-4">
-                 <button className="bg-[#5e5e5e] text-white px-4 py-2 rounded-md" onClick={handleBookingCreation}>Create Booking</button>
-             </div>
-         </div>
-         </div>
-     )
- }
+export default function BookingPage() {
+    const [loadingStatus, setLoadingStatus] = useState("loading");
+    const [rooms, setRooms] = useState([]);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/bookings`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((res) => {
+            if (res.data.bookings && Array.isArray(res.data.bookings)) {
+                if (res.data.bookings.length === 0) {
+                    setLoadingStatus("empty");
+                } else {
+                    setRooms(res.data.bookings);
+                    setLoadingStatus("success");
+                }
+            } else {
+                setLoadingStatus("empty");
+            }
+        }).catch((err) => {
+            console.log(err);
+            setLoadingStatus("error");
+        });
+    }, []);
+
+    return (
+        <div className="w-full h-screen flex items-center flex-col">
+            <h1 className="text-7xl mt-[70px] font-extrabold text-white">Your bookings</h1>
+            <div className="w-full h-auto flex flex-col items-center">
+                {loadingStatus === "loading" && <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500 mt-12"></div>}
+
+                {loadingStatus === "success" && rooms.length > 0 && rooms.map((room) => (
+                    <div key={room._id}>
+                        <BookingCard room={room} />
+                    </div>
+                ))}
+
+                {loadingStatus === "empty" && <div className="w-[500px] h-[300px] flex flex-col justify-center items-center gap-8">
+                    <h1 className="text-3xl font-bold text-white mt-12">You haven't booked yet.</h1>
+                    <Link
+                        to="/rooms"
+                        className="px-6 py-2 bg-transparent text-[#4bbb83] border border-[#4bbb83] rounded-[4px] hover:bg-[#4bbb83] hover:text-white transition duration-300 flex items-center gap-2"
+                        >
+                        Book Now
+                        <span className="text-lg">→</span>
+                    </Link>
+                    </div>}
+
+                {loadingStatus === "error" && (
+                    <div className="w-[500px] h-[500px] flex flex-col justify-center items-center px-4">
+                        <h1 className="text-[100px] font-extrabold text-[#53c28b] mb-4">Oops!</h1>
+                        <p className="text-2xl text-gray-300 mb-6 text-center">
+                            Please login and try again.
+                        </p>
+                        <Link
+                            to="/login"
+                            className="px-6 py-3 bg-[#53c28b] text-white text-lg rounded-lg shadow-md hover:bg-[#53c28b90] transition duration-300"
+                        >
+                            login
+                        </Link>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
