@@ -11,7 +11,7 @@ export default function AdminUsersPage() {
       try {
         const token = localStorage.getItem("token");
         const res = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/users/all`,
+          `${import.meta.env.VITE_BACKEND_HOST_URL}/api/users/all`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -35,7 +35,7 @@ export default function AdminUsersPage() {
     
         const token = localStorage.getItem("token");
 
-        axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/users/block/${email}`, {}, {
+        axios.put(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/users/block/${email}`, {}, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

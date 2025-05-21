@@ -16,7 +16,7 @@ export function AdminRooms() {
     if(!itemsLoaded){
       const token = localStorage.getItem("token");
       
-      axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`, {
+      axios.get(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/products`, {
         headers: {"Authorization": `Bearer ${token}`} 
       })
       .then((res) => {
@@ -37,7 +37,7 @@ export function AdminRooms() {
       setRooms(rooms.filter((room) => room.key !== key));
       const token = localStorage.getItem("token");
 
-      axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/products/${key}`, {
+      axios.delete(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/products/${key}`, {
         headers: {"Authorization": `Bearer ${token}`}
       }).then(
         (res) => {        

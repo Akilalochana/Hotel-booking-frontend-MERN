@@ -41,7 +41,7 @@ export default function UpdateRooms() {
 
     if(token){
       try{
-        const results = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/products/${roomKey}`,{
+        const results = await axios.put(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/products/${roomKey}`,{
         
           name: roomName,
           price: roomPrice,

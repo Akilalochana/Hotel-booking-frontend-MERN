@@ -45,7 +45,7 @@ export default function AdminAddRooms() {
 
 
 
-        const results = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/products`,{
+        const results = await axios.post(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/products`,{
           key: roomKey,
           name: roomName,
           price: roomPrice,

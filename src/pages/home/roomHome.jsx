@@ -12,7 +12,7 @@ export default function RoomHome() {
 
   useEffect(() => {
     // Fetch rooms data
-    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`)
+    axios.get(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/products`)
       .then((res) => {
         setRooms(res.data);
         setFilteredRooms(res.data);

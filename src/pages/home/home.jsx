@@ -4,7 +4,7 @@ import RoomsPage from "./roomsPage";
 import "./home.css";
 import Search from "../../components/search";
 import RoomHome from "./roomHome";
-import { ReviewPage } from "./review";
+import { ReviewHomePage } from "./review";
 import { Footer } from "@/components/footer";
 import ChatbotIcon from "@/components/chatBot";
 import { BlurFade } from "@/components/magicui/blur-fade";
@@ -50,7 +50,7 @@ export default function Home() {
         </div> */}
     </div>
     <RoomHome/>
-    <ReviewPage/>
+    <ReviewHomePage/>
     <ContactPage/>
     <Footer/>
     

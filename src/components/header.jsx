@@ -30,6 +30,10 @@ export default function Header() {
         <Link to="/gallery" className="hidden md:block text-[15px] m-1">
           gallery
         </Link>
+
+        <Link to="/reviews" className="hidden md:block text-[15px] m-1">
+          reviews
+        </Link>
         
         <Link to="/contact" className="hidden md:block text-[15px] m-1">
           contact

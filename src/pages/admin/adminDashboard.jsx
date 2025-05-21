@@ -12,6 +12,7 @@ import AdminUsersPage from "./adminUsersPage";
 import AdminOrdersPage from "./adminBookingPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import AdminReviews from "./adminReviews";
 
 export default function AdminDashboard() {
   const [userValidated, setUserValidated] = useState(false);
@@ -20,7 +21,7 @@ export default function AdminDashboard() {
     if(!token){
       window.location.href = "/login";
     }
-    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/`,{
+    axios.get(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/users/`,{
       headers:{
         Authorization: `Bearer ${token}`
       }
@@ -79,7 +80,7 @@ export default function AdminDashboard() {
       <Routes path="/*">
           <Route path="/orders" element={<AdminOrdersPage/>}/>
           <Route path="/rooms" element={<AdminRooms/>}/>
-          <Route path="/reviews" element={<h1>Reviews</h1>}/>
+          <Route path="/reviews" element={<AdminReviews/>}/>
           <Route path="/users" element={<AdminUsersPage/>}/>
           <Route path="/rooms/add" element={<AdminAddRooms/>}/>
           <Route path="/rooms/edit" element={<UpdateRooms/>}/>

@@ -9,7 +9,7 @@ export default function RoomsPage() {
   const [rooms, setRooms]= useState([])
   useEffect(()=>{
     if(state ==="loading"){
-      axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`).then((res)=>{
+      axios.get(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/products`).then((res)=>{
         console.log(res.data)
         setRooms(res.data)
         setState("success")

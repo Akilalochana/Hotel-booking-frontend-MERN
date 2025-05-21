@@ -10,7 +10,7 @@ export default function BookingPage() {
     useEffect(() => {
         const token = localStorage.getItem("token");
 
-        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/bookings`, {
+        axios.get(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/bookings`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function ReviewPage() {
+export function ReviewHomePage() {
   // Sample review data array
   const reviews = [
     {

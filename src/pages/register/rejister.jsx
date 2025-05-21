@@ -18,7 +18,7 @@ export default function Register() {
     console.log("Register form submitted", {
       email, password, firstName, lastName, address, phone,
     });
-     axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/`,{
+     axios.post(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/users/`,{
         email: email,
         password: password,
         firstName: firstName,

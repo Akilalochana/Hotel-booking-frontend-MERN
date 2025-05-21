@@ -13,7 +13,7 @@ import axios from "axios";
  			try {
  				const token = localStorage.getItem("token");
  				const res = await axios.get(
- 					`${import.meta.env.VITE_BACKEND_URL}/api/orders/`,
+ 					`${import.meta.env.VITE_BACKEND_HOST_URL}/api/orders/`,
  					{
  						headers: {
  							Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ import axios from "axios";
          const token = localStorage.getItem("token");
          
          axios.put(
-             `${import.meta.env.VITE_BACKEND_URL}/api/orders/status/${orderId}`,
+             `${import.meta.env.VITE_BACKEND_HOST_URL}/api/orders/status/${orderId}`,
              {
                  status: status,
              },

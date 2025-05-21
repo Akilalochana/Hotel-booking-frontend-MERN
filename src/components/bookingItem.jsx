@@ -11,7 +11,7 @@ import { addToCart, removeFromCart } from "../../utils/cart";
  	useEffect(() => {
  		if (status === "loading") {
  			axios
- 				.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${itemKey}`)
+ 				.get(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/products/${itemKey}`)
  				.then((res) => {
  					setItem(res.data);
  					setStatus("success");
