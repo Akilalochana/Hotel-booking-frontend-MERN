@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom"
 import ImageSlider from "../../components/imageSlider";
 import { addToCart, loadCart } from "../../../utils/cart";
 import toast from "react-hot-toast";
-import RoomReviews from "../../components/RoomReviews"; // Import the new component
+import RoomReviews from "@/components/roomReviews";
+
 
 export default function RoomOverview() {
   const params = useParams();
