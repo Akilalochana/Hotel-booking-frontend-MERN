@@ -33,7 +33,7 @@ export default function RoomOverview() {
         Authorization: "Bearer " + localStorage.getItem("token") 
       }
     })
-    toast.success("Booking Confirmed")
+    toast.success("Booking created successfully")
     setShowBookingPopup(false)
   }
 

@@ -84,7 +84,7 @@ export default function Search() {
         </div>
       </div>
       
-      <Link to="/rooms" className="w-full bg-[#53c28b] hover:bg-green-500 text-white py-1 md:p-1.5 rounded font-medium transition ">
+      <Link to="/rooms" className="w-full bg-[#53c28b] hover:bg-green-500 text-white py-1 px-1 md:p-1.5 rounded font-medium transition ">
         Search Availability
       </Link>
     </div>

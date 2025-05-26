@@ -19,7 +19,7 @@ export default function ContactPage() {
               <input 
                 type="text" 
                 id="name" 
-                placeholder="John Doe" 
+                placeholder="Sampath Bandara" 
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[#53c28b]"
               />
             </div>
@@ -28,7 +28,7 @@ export default function ContactPage() {
               <input 
                 type="email" 
                 id="email" 
-                placeholder="john@example.com" 
+                placeholder="sampath@example.com" 
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[#53c28b]"
               />
             </div>

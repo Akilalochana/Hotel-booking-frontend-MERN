@@ -56,7 +56,7 @@ export default function AdminDashboard() {
 
       <Link to="/admin/orders" className='w-full h-[50px] text-2xl font-bold   flex justify-center items-center gap-1'>
         <FaBookBookmark/>
-        orders
+        Bookings
       </Link>
 
       <Link to='/admin/rooms' className='w-full h-[50px] text-2xl font-bold   flex justify-center items-center gap-1'>

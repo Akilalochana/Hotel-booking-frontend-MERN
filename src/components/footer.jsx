@@ -8,7 +8,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* Brand Section */}
         <div className="flex flex-col space-y-4">
-          <h2 className="text-green-400 text-xl font-semibold mb-2">LuxStay</h2>
+          <h2 className="text-green-400 text-xl font-semibold mb-2">Hotel Win Win</h2>
           <p className="text-gray-400 text-sm">
             Experience luxury and comfort like never before. Our premium accommodations and exceptional service ensure an unforgettable stay.
           </p>
