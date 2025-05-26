@@ -86,12 +86,12 @@ import { CiHome, CiSpeaker } from "react-icons/ci";
  
  						<div
  							onClick={() => {
- 								goTo("/about");
+ 								goTo("/reviews");
  							}}
  							className="text-[20px] text-accent m-1 p-2 flex items-center gap-2 cursor-pointer hover:bg-accent/10 rounded-md"
  						>
  							<MdInfoOutline className="text-2xl" />
- 							About
+ 							reviews
  						</div>
  					</div>
  				</div>

@@ -8,7 +8,11 @@ export default function ChatbotIcon() {
     { text: "Hello! I'm Hotel Win Win's chatbot. How can I help you today?", sender: "bot" }
   ]);
   const [inputValue, setInputValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  
+  // Your API endpoint
+  const API_ENDPOINT = "https://akilalochana-my-chata.hf.space/chat";
   
   // Colors for gradient animation
   const colors = [
@@ -45,31 +49,78 @@ export default function ChatbotIcon() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
   
-  const handleSendMessage = (e) => {
+  // Function to call your fine-tuned model API
+  const callChatAPI = async (question) => {
+    try {
+      const response = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          question: question
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      // Return the response from your model
+      // Adjust this based on your API's response structure
+      return data.response || data.answer || data.message || "I apologize, but I couldn't process your request right now.";
+      
+    } catch (error) {
+      console.error('Error calling chat API:', error);
+      return "I'm sorry, I'm having trouble connecting right now. Please try again in a moment.";
+    }
+  };
+  
+  const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim() || isLoading) return;
+    
+    const userMessage = inputValue.trim();
     
     // Add user message
-    setMessages(prev => [...prev, { text: inputValue, sender: "user" }]);
+    setMessages(prev => [...prev, { text: userMessage, sender: "user" }]);
     setInputValue("");
+    setIsLoading(true);
     
-    // Simulate bot response after a delay
-    setTimeout(() => {
-      const responses = [
-        "I'd be happy to help with that!",
-        "Let me check that for you...",
-        "Our front desk can assist you with that. Would you like me to connect you?",
-        "For room service, please dial extension 2 from your room phone.",
-        "Our pool hours are from 7AM to 10PM daily.",
-        "You can find information about local attractions in our guest booklet."
-      ];
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      setMessages(prev => [...prev, { text: randomResponse, sender: "bot" }]);
-    }, 1000);
+    // Add typing indicator
+    const typingMessage = { text: "Typing...", sender: "bot", isTyping: true };
+    setMessages(prev => [...prev, typingMessage]);
+    
+    try {
+      // Call your fine-tuned model API
+      const botResponse = await callChatAPI(userMessage);
+      
+      // Remove typing indicator and add actual response
+      setMessages(prev => {
+        const newMessages = prev.filter(msg => !msg.isTyping);
+        return [...newMessages, { text: botResponse, sender: "bot" }];
+      });
+      
+    } catch (error) {
+      console.error('Error getting bot response:', error);
+      
+      // Remove typing indicator and add error message
+      setMessages(prev => {
+        const newMessages = prev.filter(msg => !msg.isTyping);
+        return [...newMessages, { 
+          text: "I apologize, but I'm experiencing some technical difficulties. Please try again later.", 
+          sender: "bot" 
+        }];
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
   
   return (
-    <div className="fixed bottom-8 right-8 z-50">
+    <div className="fixed bottom-8 right-8 md:bottom-15 md:right-16 z-50">
       <AnimatePresence>
         {isOpen && (
           <motion.div 
@@ -124,9 +175,19 @@ export default function ChatbotIcon() {
                     <div 
                       className={`max-w-xs p-3 rounded-lg ${message.sender === "user" 
                         ? "bg-blue-500 text-white rounded-br-none" 
-                        : "bg-white text-gray-800 rounded-bl-none shadow"}`}
+                        : "bg-white text-gray-800 rounded-bl-none shadow"} ${
+                        message.isTyping ? "animate-pulse" : ""
+                      }`}
                     >
-                      {message.text}
+                      {message.isTyping ? (
+                        <div className="flex space-x-1">
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                        </div>
+                      ) : (
+                        message.text
+                      )}
                     </div>
                   </motion.div>
                 ))}
@@ -141,18 +202,24 @@ export default function ChatbotIcon() {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder="Type your message..."
-                    className="flex-1 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    disabled={isLoading}
+                    className="flex-1 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                   <button
                     type="submit"
-                    className="ml-2 p-2 rounded-full text-white"
+                    disabled={isLoading || !inputValue.trim()}
+                    className="ml-2 p-2 rounded-full text-white disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{
                       background: `linear-gradient(135deg, ${colors[colorIndex]}, ${colors[(colorIndex + 2) % colors.length]})`
                     }}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
-                    </svg>
+                    {isLoading ? (
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    ) : (
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
+                      </svg>
+                    )}
                   </button>
                 </div>
               </form>

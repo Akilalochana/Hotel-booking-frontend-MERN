@@ -13,7 +13,7 @@ export default function AdminOrdersPage() {
 			try {
 				const token = localStorage.getItem("token");
 				const res = await axios.get(
-					`${import.meta.env.VITE_BACKEND_URL}/api/bookings`,
+					`${import.meta.env.VITE_BACKEND_HOST_URL}/api/bookings`,
 					{
 						headers: {
 							Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ export default function AdminOrdersPage() {
 		const token = localStorage.getItem("token");
 		axios
 			.put(
-				`${import.meta.env.VITE_BACKEND_URL}/api/bookings/status/${bookingId}`,
+				`${import.meta.env.VITE_BACKEND_HOST_URL}/api/bookings/status/${bookingId}`,
 				{ status: isApproved ? "approved" : "rejected" }, // Fixed: backend expects 'status', not 'isApproved'
 				{
 					headers: {

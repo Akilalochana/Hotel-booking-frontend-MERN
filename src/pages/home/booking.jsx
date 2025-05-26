@@ -33,7 +33,7 @@ export default function BookingPage() {
 
     return (
         <div className="w-full h-screen flex items-center flex-col">
-            <h1 className="text-7xl mt-[70px] font-extrabold text-white">Your bookings</h1>
+            <h1 className="md:text-7xl text-5xl mt-[80px] font-extrabold text-white">Your bookings</h1>
             <div className="w-full h-auto flex flex-col items-center">
                 {loadingStatus === "loading" && <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500 mt-12"></div>}
 

@@ -43,7 +43,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-picture text-[#bbb] flex items-center justify-center">
 
-      <div className="bg-black/70 p-8 rounded-2xl shadow-lg w-[400px]">
+      <div className="bg-black/70 p-8 rounded-2xl shadow-lg md:w-[400px] w-[350px]">
         <div className="flex flex-col items-center mb-6">
 
           <img

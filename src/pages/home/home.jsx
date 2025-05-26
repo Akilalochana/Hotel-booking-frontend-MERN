@@ -42,7 +42,7 @@ export default function Home() {
           <span>Indulge in exceptional comfort and unparalleled service at our premium hotel destinations.</span>
         </div>  
         <Search/>
-        <div className="w-[100px] h-[100px] fixed ml-[1300px] mt-[500px]">
+        <div className="w-[100px] h-[100px] fixed z-50 ml-[1300px] mt-[500px]">
           <ChatbotIcon/>
         </div>
         {/* <div className="w-[100px] h-[100px] fixed ml-[1300px] mt-[10px] ">
