@@ -33,7 +33,7 @@ export default function BookingPage() {
 
     return (
         <div className="w-full h-screen flex items-center flex-col">
-            <h1 className="md:text-7xl text-5xl mt-[80px] font-extrabold text-white">Your bookings</h1>
+            <h1 className="md:text-7xl text-5xl mt-[90px] mb-[20px] font-extrabold">Your bookings</h1>
             <div className="w-full h-auto flex flex-col items-center">
                 {loadingStatus === "loading" && <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500 mt-12"></div>}
 
@@ -56,7 +56,7 @@ export default function BookingPage() {
 
                 {loadingStatus === "error" && (
                     <div className="w-[500px] h-[500px] flex flex-col justify-center items-center px-4">
-                        <h1 className="text-[100px] font-extrabold text-[#53c28b] mb-4">Oops!</h1>
+                        <h1 className="text-[80px] font-extrabold text-[#53c28b] mb-4">Oops!</h1>
                         <p className="text-2xl text-gray-300 mb-6 text-center">
                             Please login and try again.
                         </p>
