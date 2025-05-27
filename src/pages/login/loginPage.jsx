@@ -13,7 +13,7 @@ export default function LoginPage() {
     {
       onSuccess:(res)=>{
         console.log(res)
-        axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/google`,{
+        axios.post(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/users/google`,{
           accesToken : res.access_token
         }).then((res)=>{
             console.log(res)
