@@ -3,11 +3,34 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
+import { useGoogleLogin } from "@react-oauth/google";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const googleLogin = useGoogleLogin(
+    {
+      onSuccess:(res)=>{
+        console.log(res)
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/google`,{
+          accesToken : res.access_token
+        }).then((res)=>{
+            console.log(res)
+            toast.success("Login successful")
+            const user  = res.data.user
+            localStorage.setItem("token", res.data.token)
+            if(user.role === "admin"){
+              navigate("/admin/")
+            }else{
+              navigate("/");
+            }
+        }).catch((err)=>{
+          console.log(err)
+        })
+      }
+    }
+  )
   const backendUrl = import.meta.env.VITE_BACKEND_HOST_URL
  
 
@@ -85,6 +108,13 @@ export default function LoginPage() {
             className="w-full bg-[#53c28b] hover:bg-[#53c28b70] text-white font-medium py-3 rounded-md transition" 
           >
             Login
+          </button>
+
+            <button
+            type="submit"
+            className="w-full bg-[#53c28b] hover:bg-[#53c28b70] text-white font-medium py-3 rounded-md transition" onClick={googleLogin}
+          >
+            Login with google
           </button>
 
         </form>
