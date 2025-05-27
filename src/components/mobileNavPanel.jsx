@@ -21,11 +21,11 @@ export default function MobileNavPanel(props) {
 					<div className="h-full bg-gradient-to-b from-gray-900 via-gray-800 to-black w-[320px] shadow-2xl border-r border-gray-700">
 						{/* Header */}
 						<div className="bg-gradient-to-r from-gray-800 to-gray-900 w-full h-[80px] flex relative justify-center items-center border-b border-gray-700">
-							{/* <img
+							<img
 								src="/logo.png"
 								alt="logo"
-								className="w-[65px] h-[65px] object-cover border-[3px] border-green-500/50 absolute left-3 rounded-full shadow-lg"
-							/> */}
+								className="w-[65px] h-[65px] object-cover border-[3px] border-green-500/30 absolute left-3 rounded-full shadow-lg"
+							/>
 							<div className="text-white font-bold text-lg">Hotel Win Win</div>
 							<IoMdClose
 								className="absolute right-4 text-3xl cursor-pointer text-gray-400 hover:text-white transition-colors"

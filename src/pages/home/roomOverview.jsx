@@ -57,7 +57,7 @@ export default function RoomOverview() {
       )}
 
       {loadingStatus === "loaded" && (
-        <div className="w-full max-w-[750px] flex flex-col gap-8 bg-[#1a1a1a] p-4 rounded-xl shadow-lg mb-10">
+        <div className="w-full max-w-[750px] mt-[60px] flex flex-col gap-8 bg-[#1a1a1a] p-4 rounded-xl shadow-lg mb-10">
           
           <div className="w-full md:flex md:flex-row gap-8 items-center">
             <div className="w-full md:w-1/2">

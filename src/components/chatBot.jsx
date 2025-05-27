@@ -11,9 +11,6 @@ export default function ChatbotIcon() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
   
-  // Your API endpoint
-  const API_ENDPOINT = "https://akilalochana-my-chata.hf.space/chat";
-  
   // Colors for gradient animation
   const colors = [
     "rgb(255, 100, 100)",
@@ -25,6 +22,119 @@ export default function ChatbotIcon() {
   ];
   
   const [colorIndex, setColorIndex] = useState(0);
+  
+  // Predefined responses for the hotel chatbot
+  const getResponse = (userInput) => {
+    const input = userInput.toLowerCase().trim();
+    
+    // Greeting responses
+    if (input.includes('hi') || input.includes('hello') || input.includes('hey')) {
+      return "Hi! I'm Hotel Win Win chat assistant. How can I help you today?";
+    }
+    
+    // Swimming pool question
+    if (input.includes('swimming') || input.includes('pool') || input.includes('swim')) {
+      return "No, we don't have a swimming pool in our hotel. However, we offer many other great amenities!";
+    }
+    
+    // Booking related questions
+    if (input.includes('booking') || input.includes('book') || input.includes('reservation') || input.includes('reserve')) {
+      return "You can easily make a booking through our website. Just select your check-in and check-out dates, choose your room type, and complete the reservation process.";
+    }
+    
+    // Room types
+    if (input.includes('room') || input.includes('rooms') || input.includes('types')) {
+      return "We offer various room types including Standard Rooms, Deluxe Rooms, and Suites. Each room comes with modern amenities and comfortable furnishing.";
+    }
+    
+    // Pricing
+    if (input.includes('price') || input.includes('cost') || input.includes('rate') || input.includes('charges')) {
+      return "Room prices vary based on the type and season. Please check our booking page for current rates and special offers.";
+    }
+    
+    // Amenities
+    if (input.includes('amenities') || input.includes('facilities') || input.includes('services')) {
+      return "Our hotel offers free Wi-Fi, 24/7 room service, air conditioning, restaurant, parking, and much more. Check our facilities page for the complete list.";
+    }
+    
+    // Restaurant/Food
+    if (input.includes('restaurant') || input.includes('food') || input.includes('dining') || input.includes('breakfast')) {
+      return "Yes, we have an in-house restaurant serving delicious local and international cuisine. We also offer room service 24/7.";
+    }
+    
+    // Parking
+    if (input.includes('parking') || input.includes('car') || input.includes('vehicle')) {
+      return "Yes, we provide free parking facilities for our guests. The parking area is secure and monitored 24/7.";
+    }
+    
+    // WiFi
+    if (input.includes('wifi') || input.includes('internet') || input.includes('connection')) {
+      return "Yes, we offer complimentary high-speed Wi-Fi throughout the hotel premises for all our guests.";
+    }
+    
+    // Location
+    if (input.includes('location') || input.includes('address') || input.includes('where')) {
+      return "Hotel Win Win is conveniently located in the heart of the city with easy access to major attractions and transportation.";
+    }
+    
+    // Check-in/Check-out
+    if (input.includes('check') || input.includes('checkin') || input.includes('checkout')) {
+      return "Check-in time is 2:00 PM and check-out time is 12:00 PM. Early check-in and late check-out may be available upon request.";
+    }
+    
+    // Contact
+    if (input.includes('contact') || input.includes('phone') || input.includes('call') || input.includes('email')) {
+      return "You can contact us through our website's contact form or call our reception for immediate assistance.";
+    }
+    
+    // Cancellation
+    if (input.includes('cancel') || input.includes('refund') || input.includes('policy')) {
+      return "We have a flexible cancellation policy. Please check your booking confirmation email for specific cancellation terms for your reservation.";
+    }
+    
+    // Payment
+    if (input.includes('payment') || input.includes('pay') || input.includes('card') || input.includes('cash')) {
+      return "We accept all major credit cards, debit cards, and cash payments. Online payments are also available during booking.";
+    }
+    
+    // AC/Air conditioning
+    if (input.includes('ac') || input.includes('air') || input.includes('conditioning') || input.includes('cooling')) {
+      return "Yes, all our rooms are equipped with modern air conditioning systems for your comfort.";
+    }
+    
+    // Laundry
+    if (input.includes('laundry') || input.includes('washing') || input.includes('clothes')) {
+      return "We provide laundry services for our guests. Please contact reception for more details about pricing and timing.";
+    }
+    
+    // Gym/Fitness
+    if (input.includes('gym') || input.includes('fitness') || input.includes('exercise') || input.includes('workout')) {
+      return "Currently, we don't have a gym facility, but we can recommend nearby fitness centers if needed.";
+    }
+    
+    // Pet policy
+    if (input.includes('pet') || input.includes('dog') || input.includes('cat') || input.includes('animal')) {
+      return "Please contact our reception to inquire about our pet policy and any additional charges that may apply.";
+    }
+    
+    // Events/Meetings
+    if (input.includes('event') || input.includes('meeting') || input.includes('conference') || input.includes('party')) {
+      return "We have facilities for small meetings and events. Please contact our management for availability and pricing.";
+    }
+    
+    // Thank you responses
+    if (input.includes('thank') || input.includes('thanks')) {
+      return "You're welcome! If you have any other questions, feel free to ask. We're here to help!";
+    }
+    
+    // Goodbye responses
+    if (input.includes('bye') || input.includes('goodbye') || input.includes('see you')) {
+      return "Thank you for choosing Hotel Win Win! Have a great day and we look forward to welcoming you soon!";
+    }
+    
+    // Default response for unrecognized queries
+    return "I'm sorry, I didn't quite understand that. Could you please rephrase your question? I can help you with information about rooms, booking, amenities, and other hotel services.";
+  };
   
   // Animate color every 2 seconds
   useEffect(() => {
@@ -49,35 +159,6 @@ export default function ChatbotIcon() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
   
-  // Function to call your fine-tuned model API
-  const callChatAPI = async (question) => {
-    try {
-      const response = await fetch(API_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          question: question
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      
-      // Return the response from your model
-      // Adjust this based on your API's response structure
-      return data.response || data.answer || data.message || "I apologize, but I couldn't process your request right now.";
-      
-    } catch (error) {
-      console.error('Error calling chat API:', error);
-      return "I'm sorry, I'm having trouble connecting right now. Please try again in a moment.";
-    }
-  };
-  
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!inputValue.trim() || isLoading) return;
@@ -93,9 +174,9 @@ export default function ChatbotIcon() {
     const typingMessage = { text: "Typing...", sender: "bot", isTyping: true };
     setMessages(prev => [...prev, typingMessage]);
     
-    try {
-      // Call your fine-tuned model API
-      const botResponse = await callChatAPI(userMessage);
+    // Simulate thinking time (1-2 seconds)
+    setTimeout(() => {
+      const botResponse = getResponse(userMessage);
       
       // Remove typing indicator and add actual response
       setMessages(prev => {
@@ -103,20 +184,8 @@ export default function ChatbotIcon() {
         return [...newMessages, { text: botResponse, sender: "bot" }];
       });
       
-    } catch (error) {
-      console.error('Error getting bot response:', error);
-      
-      // Remove typing indicator and add error message
-      setMessages(prev => {
-        const newMessages = prev.filter(msg => !msg.isTyping);
-        return [...newMessages, { 
-          text: "I apologize, but I'm experiencing some technical difficulties. Please try again later.", 
-          sender: "bot" 
-        }];
-      });
-    } finally {
       setIsLoading(false);
-    }
+    }, Math.random() * 1000 + 1000); // Random delay between 1-2 seconds
   };
   
   return (
@@ -203,7 +272,7 @@ export default function ChatbotIcon() {
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder="Type your message..."
                     disabled={isLoading}
-                    className="flex-1 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="flex-1 px-4 py-2 rounded-full border text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                   <button
                     type="submit"
