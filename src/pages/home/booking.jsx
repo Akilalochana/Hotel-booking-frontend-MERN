@@ -56,7 +56,7 @@ export default function BookingPage() {
 
                 {loadingStatus === "error" && (
                     <div className="w-[500px] h-[500px] flex flex-col justify-center items-center px-4">
-                        <h1 className="text-[100px] font-extrabold text-[#53c28b] mb-4">Oops!</h1>
+                        {/* <h1 className="text-[100px] font-extrabold text-[#53c28b] mb-4">Oops!</h1>
                         <p className="text-2xl text-gray-300 mb-6 text-center">
                             Please login and try again.
                         </p>
@@ -65,6 +65,14 @@ export default function BookingPage() {
                             className="px-6 py-3 bg-[#53c28b] text-white text-lg rounded-lg shadow-md hover:bg-[#53c28b90] transition duration-300"
                         >
                             login
+                        </Link> */}
+                         <h1 className="text-3xl font-bold text-white mt-12">Please loging and try again.</h1>
+                        <Link
+                            to="/login"
+                            className="px-6 py-2 bg-transparent text-[#4bbb83] border border-[#4bbb83] rounded-[4px] hover:bg-[#4bbb83] hover:text-white transition duration-300 flex items-center gap-2"
+                            >
+                            login
+                            <span className="text-lg">→</span>
                         </Link>
                     </div>
                 )}
