@@ -34,7 +34,8 @@ export default function BookingPage() {
     return (
         <div className="w-full h-screen flex items-center flex-col">
             <h1 className="md:text-7xl text-5xl mt-[90px] mb-[20px] font-extrabold">Your bookings</h1>
-            <div className="w-full h-auto flex flex-col items-center">
+            <div className="w-[1500px] h-auto flex flex-col md:flex-row md:gap-4 justify-center flex-wrap">
+
                 {loadingStatus === "loading" && <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500 mt-12"></div>}
 
                 {loadingStatus === "success" && rooms.length > 0 && rooms.map((room) => (
