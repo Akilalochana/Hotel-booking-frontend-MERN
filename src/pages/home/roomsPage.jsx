@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 import ProductCard from "../../components/productCard"
 import { BlurFade } from "@/components/magicui/blur-fade"
+import { SkeletonCard } from "@/components/SkeletonCard"
 
 export default function RoomsPage() {
   const [state, setState]= useState("loading")//loding,success,error
@@ -38,8 +39,17 @@ export default function RoomsPage() {
       
     <div className="w-full h-full flex flex-wrap justify-center  pt-[30px] gap-[50px]">
       
-      {state === "loading" && <div className="w-full h-full flex justify-center items-center ">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div></div>}
+      {state === "loading" && 
+      <div className="flex gap-20 flex-wrap justify-center">
+          <SkeletonCard/>
+          <SkeletonCard/>
+          <SkeletonCard/>
+          <SkeletonCard/>
+          <SkeletonCard/>
+          <SkeletonCard/>
+          <SkeletonCard/>
+          <SkeletonCard/>
+      </div>}
 
       {state === "success" && 
       

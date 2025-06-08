@@ -3,6 +3,7 @@ import axios from "axios";
 import ProductCard from "../../components/productCard";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { SkeletonCard } from "@/components/SkeletonCard";
 
 export default function RoomHome() {
   const [rooms, setRooms] = useState([]);
@@ -85,8 +86,11 @@ export default function RoomHome() {
  
       <div className="w-full max-w-6xl px-4">
         {loading ? (
-          <div className="w-full flex justify-center items-center py-12">
-            <div className="w-12 h-12 border-4 rounded-full border-t-[#4ce498] animate-spin"></div>
+          <div className="flex gap-10">
+            <SkeletonCard/>
+            <SkeletonCard/>
+            <SkeletonCard/>
+            <SkeletonCard/>
           </div>
         ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

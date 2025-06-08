@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FaStar } from "react-icons/fa";
+import { SkeletonDemo } from "@/components/SkeletonDemo";
 
 export default function ReviewPage() {
   const [loadingStatus, setLoadingStatus] = useState("loading");
@@ -198,8 +199,11 @@ export default function ReviewPage() {
         <h2 className="text-2xl font-semibold mb-6">What Our Guests Say</h2>
 
         {loadingStatus === "loading" && (
-          <div className="w-full flex justify-center py-10">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+          <div className="flex flex-col space-y-6">
+            <SkeletonDemo/>
+            <SkeletonDemo/>
+            <SkeletonDemo/>
+            <SkeletonDemo/>
           </div>
         )}
 
